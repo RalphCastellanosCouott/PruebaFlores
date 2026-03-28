@@ -42,11 +42,11 @@ def load_image_from_url(url):
 
 # Función para preprocesar la imagen
 def preprocess_image(img):
-    # Redimensionar a 180x180 como se usó en el entrenamiento
+    # Convertir a RGB por si la imagen viene en otro formato (RGBA, etc.)
+    if img.mode != 'RGB':
+        img = img.convert('RGB')
     img = img.resize((180, 180))
-    # Convertir a array y normalizar
     img_array = np.array(img) / 255.0
-    # Añadir dimensión de batch
     img_array = np.expand_dims(img_array, axis=0)
     return img_array
 
