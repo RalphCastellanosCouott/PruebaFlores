@@ -50,6 +50,16 @@ def preprocess_image(img):
     img_array = np.expand_dims(img_array, axis=0)
     return img_array
 
+# DEPURACIÓN: Ver los valores de la imagen procesada
+st.write(f"Forma de la imagen: {img_array.shape}")
+st.write(f"Rango de valores: min={img_array.min():.4f}, max={img_array.max():.4f}")
+st.write(f"Valor promedio: {img_array.mean():.4f}")
+
+# Mostrar las probabilidades de todas las clases
+predictions = model.predict(img_array, verbose=0)[0]
+for i, name in enumerate(class_names):
+    st.write(f"{name}: {predictions[i]:.4f}")
+
 # Función para hacer la predicción
 def predict_image(model, img_array, class_names):
     predictions = model.predict(img_array, verbose=0)[0]
